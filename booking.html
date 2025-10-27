@@ -109,25 +109,31 @@
   <script>
     const bookingForm = document.getElementById("bookingForm");
 
-    bookingForm.addEventListener("submit", function(e) {
+      bookingForm.addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const data = {
+        const data = {
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value, 
         guests: document.getElementById("guests").value,
         date: document.getElementById("date").value,
         time: document.getElementById("time").value,
         message: document.getElementById("message").value
       };
 
+      if (!/^[0-9]{10,15}$/.test(data.phone)) {
+        alert("Please enter a valid phone number (10–15 digits).");
+        return;
+      }
+
       console.log("New Booking:", data);
-      alert(
-        `Thank you, ${data.name}!\nYour reservation for ${data.guests} guests on ${data.date} at ${data.time} has been received.`
+
+      alert(`Thank you, ${data.name}!\nYour booking for ${data.guests} guests on ${data.date} at ${data.time} has been received.\nWe'll confirm through ${data.phone}.`
       );
 
-      bookingForm.reset();
-    });
+    bookingForm.reset();
+  });
   </script>
 </body>
 </html>
